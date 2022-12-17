@@ -48,8 +48,8 @@
     "devDependencies": {
         "@ava/typescript": "^3.0.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.1",
-        "@typescript-eslint/eslint-plugin": "^4.0.1",
-        "@typescript-eslint/parser": "^4.0.1",
+        "@typescript-eslint/eslint-plugin": "^5.0.0",
+        "@typescript-eslint/parser": "^5.0.0",
         "ava": "^5.1.0",
         "codecov": "^3.5.0",
         "cspell": "^6.0.0",
