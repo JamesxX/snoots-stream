@@ -11,7 +11,7 @@ export class snootsStream {
 
     }
 
-    postStream<U extends Content, T extends (...args: readonly any[]) => any = (...args: readonly any[]) => Listing<Post>>(
+    postStream<U extends Content, T extends (...args: any[]) => any = (...args: any[]) => Listing<Post>>(
         rateMilliseconds: number,
         pollFn: T,
         ...args: Parameters<T>
@@ -23,19 +23,22 @@ export class snootsStream {
             ...args
         )
 
-        let old_cache: readonly U[] = [];
+        let old_cache: U[] = [];
+        const start = Date.now();
 
         poll.on('data', async (data: Listing<U>) => {
+
             const new_cache: U[] = [];
             for await (const element of data) {
+                if (element.createdUtc < start / 1000) continue;
                 new_cache.push(element)
-
-                // dedupe
                 if (old_cache.filter(el => el.id == element.id).length > 0) continue;
+
                 poll.emit('post', element)
             }
 
             old_cache = new_cache;
+            poll.loop()
         })
 
 
@@ -43,21 +46,22 @@ export class snootsStream {
     }
 
 
-    submissionStream(subreddit?: string | undefined) {
+    submissionStream(pollRate: number, subreddit?: string | undefined) {
         return this.postStream(
-            0,
-            this.snootsClient.subreddits.getNewPosts.bind(this.snootsClient),
+            pollRate,
+            this.snootsClient.subreddits.getNewPosts.bind(this.snootsClient.subreddits),
             subreddit
         )
     }
 
-    /*commentStream(subreddit?: string | undefined) {
+    commentStream(pollRate: number, subreddit?: string | undefined) {
         return this.postStream(
-            0,
-            this.snootsClient.subreddits.getNewComments.bind(this.snootsClient),
-            subreddit
+            pollRate,
+            this.snootsClient.subreddits.getSortedComments.bind(this.snootsClient.subreddits),
+            subreddit,
+            "new"
         )
-    }*/
+    }
 
 
 }

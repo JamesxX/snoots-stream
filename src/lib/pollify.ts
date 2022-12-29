@@ -5,8 +5,8 @@ type IPollify<ReturnType> = {
     emit(event: 'data', data: ReturnType): void;
 };
 
-export class Pollify<T extends (...args: readonly any[]) => any> extends EventEmitter implements IPollify<ReturnType<T>> {
-    public stopped = false;
+export class Pollify<T extends (...args: any[]) => any> extends EventEmitter implements IPollify<ReturnType<T>> {
+    public stopped = true;
     public firstRun = true
 
     private lastPoll = 0;
@@ -30,16 +30,16 @@ export class Pollify<T extends (...args: readonly any[]) => any> extends EventEm
         }
     }
 
-    private loop() {
+    public loop() {
         if (this.stopped) return;
 
         // If the function is due to be polled
         if (Date.now() > (this.lastPoll + this.rateMilliseconds)) {
-            this.callPollFunction()
             this.lastPoll = Date.now();
+            this.callPollFunction()
+        } else {
+            setTimeout(this.loop.bind(this), this.lastPoll + this.rateMilliseconds - Date.now())
         }
-
-        setTimeout(this.loop.bind(this), this.lastPoll + this.rateMilliseconds - Date.now())
     }
 
 
