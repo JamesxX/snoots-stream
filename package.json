@@ -43,6 +43,8 @@
     },
     "dependencies": {
         "@bitauth/libauth": "^1.17.1",
+        "async-mutex": "^0.4.0",
+        "callable-instance": "^2.0.0",
         "snoots": "^1.0.0-dev.26"
     },
     "devDependencies": {
@@ -84,7 +86,8 @@
         "typescript": {
             "rewritePaths": {
                 "src/": "build/main/"
-            }
+            },
+            "compile": "tsc"
         },
         "files": [
             "!build/module/**"
@@ -96,7 +99,9 @@
         }
     },
     "prettier": {
-        "singleQuote": true
+        "singleQuote": true,
+        "useTabs": true,
+        "tabWidth": 4
     },
     "nyc": {
         "extends": "@istanbuljs/nyc-config-typescript",
