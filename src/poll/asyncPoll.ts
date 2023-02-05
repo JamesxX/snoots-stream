@@ -1,8 +1,8 @@
-import EventEmitter from 'node:events';
+import EventEmitter from 'events';
 
 import { Mutex } from 'async-mutex';
 
-/** Configuration for {AsyncPoll} class */
+/** Configuration for {@link AsyncPoll} class */
 export interface IAsyncPollOptions {
 	/** Frequency with which to call `this.pollFunction` */
 	frequency: number;
