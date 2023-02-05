@@ -12,27 +12,26 @@ import { SnootsListingPoll } from '../poll/snootsListingPoll';
  * due to the asynchronous nature of the underlying Reddit API wrapper, some
  * overlap may be experienced. This is largely handled internally using mutex
  * locking, and can also be avoided by choosing a slower frequency.
- * 
+ *
  * @category Content Streams
  * @example
  * import { Client } from 'snoots';
  * import { skipDuplicates, skipExisting } from './middlewares';
  * import { CommentStream } from '.';
- * 
+ *
  * // Instantiate a Snoots client (or re-use one)
  * const client = new Client({...})
- * 
+ *
  * // Create a comment stream that fetches comments from r/AskReddit ever 5000ms
  * const comments = new CommentStream( client, { frequency: 5000 }, 'AskReddit' );
- * 
+ *
  * // Add middleware (more on that later)
  * comments.use(new skipExisting(), new skipDuplicates('id'));
- * 
+ *
  * // For every comment, log it to the console
  * comments.on('item', console.log)
  */
 export class CommentStream extends SnootsListingPoll<Comment> {
-
 	/**
 	 * @param client Snoots client instance with which to fetch new comments
 	 * @param options IAsyncPollOptions interface used to set the frequency of the polling
@@ -43,5 +42,4 @@ export class CommentStream extends SnootsListingPoll<Comment> {
 			client.subreddits.getSortedComments(subreddit, 'new')
 		);
 	}
-
 }

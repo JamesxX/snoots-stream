@@ -9,12 +9,13 @@ export type Middleware<T> = (
 ) => Promise<boolean> | boolean;
 
 export abstract class AsyncPollMiddleware<T> extends AsyncPoll {
-
 	/** @internal */
 	private middlewares: Middleware<T>[] = [];
 
 	/** @internal */
-	constructor(options: IAsyncPollOptions) { super(options); }
+	constructor(options: IAsyncPollOptions) {
+		super(options);
+	}
 
 	/**
 	 * Add additional middleware to the content stream.
@@ -56,7 +57,7 @@ export abstract class AsyncPollMiddleware<T> extends AsyncPoll {
  * can be stored on classes that extend this to store information between polls (such as
  * in the case of {@link skipDuplicates}, where a record is kept of already processed
  * content).
- * 
+ *
  * By overriding {@link MiddlewareClass.method}, you can provide your own functionality.
  */
 export abstract class MiddlewareClass<T> extends CallableInstance<
@@ -64,7 +65,9 @@ export abstract class MiddlewareClass<T> extends CallableInstance<
 	boolean | Promise<boolean>
 > {
 	/** @internal */
-	constructor() { super('method'); }
+	constructor() {
+		super('method');
+	}
 
 	/**
 	 * Override this function to provide the desired feature. This function is called for
