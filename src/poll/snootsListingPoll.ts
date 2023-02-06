@@ -3,18 +3,23 @@ import { Content, Listing } from 'snoots';
 import { IAsyncPollOptions } from './asyncPoll';
 import { AsyncPollMiddleware } from './asyncPollMiddleware';
 
+// Event Typing
+interface PollEvents<T> {
+	item: (item: T) => void;
+	listing: (items: T[]) => void;
+	end: () => void;
+}
+
 export interface SnootsListingPoll<T extends Content> {
-	on(event: 'item', listener: (item: T) => void): this;
-	on(event: 'listing', listener: (items: T[]) => void): this;
-	on(event: 'end', listener: () => void): this;
-
-	once(event: 'item', listener: (item: T) => void): this;
-	once(event: 'listing', listener: (items: T[]) => void): this;
-	once(event: 'end', listener: () => void): this;
-
-	off(event: 'item', listener: (item: T) => void): this;
-	off(event: 'listing', listener: (items: T[]) => void): this;
-	off(event: 'end', listener: () => void): this;
+	on<U extends keyof PollEvents<T>>(event: U, listener: PollEvents<T>[U]): this;
+	once<U extends keyof PollEvents<T>>(
+		event: U,
+		listener: PollEvents<T>[U]
+	): this;
+	off<U extends keyof PollEvents<T>>(
+		event: U,
+		listener: PollEvents<T>[U]
+	): this;
 }
 
 /**
