@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/JamesxX/snoots-stream/compare/v2.0.0...v2.1.0) (2023-02-06)
+
+
+### Features
+
+* **multiplexer:** begin implementing multiplexer ([5e5b6e3](https://github.com/JamesxX/snoots-stream/commit/5e5b6e31da23a8e60925cad2bc5551477d99c2c6))
+* **multiplexer:** export new class ([a06c7f4](https://github.com/JamesxX/snoots-stream/commit/a06c7f4e0d5d20f1fffccfeb96ab254d65d12c36))
+* **snootsListingPoll:** fix incorrect typing ([d8b126d](https://github.com/JamesxX/snoots-stream/commit/d8b126d6f40af1ee4e5731a519df208f021c7979))
+
 ## 2.0.0 (2023-02-05)
 
 
