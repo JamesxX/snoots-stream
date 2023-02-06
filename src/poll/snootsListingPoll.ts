@@ -11,7 +11,10 @@ interface PollEvents<T> {
 }
 
 export interface SnootsListingPoll<T extends Content> {
-	on<U extends keyof PollEvents<T>>(event: U, listener: PollEvents<T>[U]): this;
+	on<U extends keyof PollEvents<T>>(
+		event: U,
+		listener: PollEvents<T>[U]
+	): this;
 	once<U extends keyof PollEvents<T>>(
 		event: U,
 		listener: PollEvents<T>[U]
