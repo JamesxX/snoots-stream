@@ -31,6 +31,13 @@ export class StreamMultiplexer<
 
 	public use(...mw: Middleware<U>[]): void {
 		this.middlewares.push(...mw);
+		this.useMiddlewareOnStream(...mw);
+	}
+
+	private useMiddlewareOnStream(...mw: Middleware<U>[]) {
+		if (this.stream == undefined) return;
+		// @ts-expect-error: Disable TS2345 due to weird type resolution
+		this.stream.use(...mw);
 	}
 
 	private subscribeSingleSubreddit(subreddit: string): void {
@@ -46,11 +53,7 @@ export class StreamMultiplexer<
 			this.subreddits.join('+')
 		);
 
-		// This is dumb, but TS2345 insists
-		if (this.stream instanceof CommentStream)
-			this.stream.use(...(<Middleware<Comment>[]>this.middlewares));
-		if (this.stream instanceof SubmissionStream)
-			this.stream.use(...(<Middleware<Post>[]>this.middlewares));
+		this.useMiddlewareOnStream(...this.middlewares);
 
 		// Add internal dispatcher
 		this.stream.on('item', this.onItem.bind(this));
