@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/JamesxX/snoots-stream/compare/v2.1.1...v2.1.2) (2023-02-07)
+
+
+### Bug Fixes
+
+* **multiplexer:** add middleware to stream without needing to call invalidate ([af41db8](https://github.com/JamesxX/snoots-stream/commit/af41db8f8678217dacb359e99b0dbc8400cb823a))
+* **multiplexer:** fix case sensitivity in onItem callback ([fa5d920](https://github.com/JamesxX/snoots-stream/commit/fa5d92041ea053e8d24f5721d05eb177f6a81bb6))
+
 ### [2.1.1](https://github.com/JamesxX/snoots-stream/compare/v2.1.0...v2.1.1) (2023-02-06)
 
 ## [2.1.0](https://github.com/JamesxX/snoots-stream/compare/v2.0.0...v2.1.0) (2023-02-06)
