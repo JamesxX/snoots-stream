@@ -75,7 +75,7 @@ export class StreamMultiplexer<
 
 	private onItem(item: U): void {
 		for (const callback of this.callbacks[
-			(<Comment | Post>item).subreddit
+			(<Comment | Post>item).subreddit.toLowerCase()
 		]) {
 			callback(item);
 		}
